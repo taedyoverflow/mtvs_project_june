@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form action="/member/save" method="post">
+  <!-- name속성: 서버로 전송할 때 변수이름의 역할 -->
+  이메일: <input type="text" name="memberEmail" id="memberEmail" onblur="emailCheck()"> <br>
+  <p id="check-result"></p>
+  비밀번호: <input type="password" name="memberPassword"> <br>
+  이름: <input type="text" name="memberName"> <br>
+  <input type="submit" value="회원가입">
+</form>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <title>Reserve Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg shadow p-3 mb-5 rounded" style="background-color: #198754; margin-top: 15px">
+    <div class="container-fluid">
+        <a style="color: white" class="navbar-brand fs-5" href="#">MTVS reserve</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <span>
+            <a style="color: white" class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+            </span>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"  >
+                <span class="nav-item" style="color: white; font-size: 30px; text-align: center;
+                         padding-left: 430px">메타버스 스터디룸 예약 시스템</span><br>
+            </ul>
+            <span class="navbar-text">
+                </span>
+        </div>
+    </div>
+</nav>
+<h4 align="center" th:text="|현재 선택하신 Study Room은 ${roomNum}입니다.|"></h4>
+<hr>
+<h4 align="center" th:text="|Day : ${date}|"></h4>
+<hr>
+<div align="center"
+     style= " background-color: #479F76;
+                 border: black;
+                 border-radius: 30px;
+                 height: 100%;">
+    <form action="doreserve1" method="post">
+        <p align="center" style="color: white">* 시간을 선택해주세요.</p>
+        <style>
+            .myTimeButton {
+                /*background: hsl(100deg 100% 32%);*/
+                border-radius: 12px;
+                border: black;
+                padding: 0;
+                cursor: pointer;
+                outline-offset: 4px;
+            }
+            .front {
+                display: block;
+                padding: 12px 42px;
+                border-radius: 12px;
+                font-size: 1.25rem;
+                /*background: hsl(120deg 100% 47%);*/
+                color: black;
+                /*transform: translateY(-6px);*/
+            }
+
+        </style>
+        <th:block th:each="tlist: ${timelist}">
+            <button class="myTimeButton" th:value="${tlist.getTime()}" name="timeNum">
+                <span th:text="${tlist.getTimeString()}" class="front"></span>
+            </button>
+        </th:block>
+        <br>
+        <input type="text" th:value="${roomNum}" name="roomNum" hidden="hidden"> <br>
+        <p align="center" style="color: white">*한번 예약시 최대 이용시간은 2시간이며 2개의 예약까지 가능합니다.</p>
+        <input type="text" th:value="${date}" name="date" hidden="hidden"> <br>
+    </form>
+</div>
+<script th:inline="javascript">
+    var myButtons = document.getElementsByClassName("myTimeButton");
+    var disabledTimeNums = [[${roomlist}]];
+    console.log(disabledTimeNums);
+    for (var i = 0; i < myButtons.length; i++) {
+        for (var j = 0; j < disabledTimeNums.length; j++) {
+            if(disabledTimeNums[j].timeNum-1 == i) {
+                myButtons[i].disabled = true;
+            }
+        }
+    }
+</script>
+</body>
+</html>

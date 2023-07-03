@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <title>Reserve Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg shadow p-3 mb-5 rounded" style="background-color: #198754; margin-top: 15px">
+    <div class="container-fluid">
+        <a style="color: white" class="navbar-brand fs-5" href="#">MTVS reserve</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <span>
+            <a style="color: white" class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+            </span>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"  >
+                <span class="nav-item" style="color: white; font-size: 30px; text-align: center;
+                         padding-left: 430px">메타버스 스터디룸 예약 시스템</span><br>
+            </ul>
+            <span class="navbar-text">
+                </span>
+        </div>
+    </div>
+</nav>
+<p align="center">* 이미지에서 예약하실 스터디룸을 선택해주세요.</p>
+<div align="center">
+    <form id="reservationForm" action="doreserve" method="get">
+        <input type="hidden" name="roomNum" id="roomNum" value="">
+    </form>
+</div>
+<div align="center">
+    <img src="img/room1.png" usemap="#imagemap" class="responsive-img">
+</div>
+<map name="imagemap">
+    <area target="_blank" alt="room1" title="room1" onclick="sendRequest('M201')" coords="221,111,293,150" shape="rect">
+    <area target="_blank" alt="room2" title="room2" onclick="sendRequest('M202')" coords="220,161,292,199" shape="rect">
+    <area target="_blank" alt="room3" title="room3" onclick="sendRequest('M203')" coords="221,210,293,251" shape="rect">
+    <area target="_blank" alt="room4" title="room4" onclick="sendRequest('M204')" coords="484,531,549,627" shape="rect">
+    <area target="_blank" alt="room5" title="room5" onclick="sendRequest('M205')" coords="411,530,473,627" shape="rect">
+    <area target="_blank" alt="room6" title="room6" onclick="sendRequest('M206')" coords="338,528,398,629" shape="rect">
+</map>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function sendRequest(roomNumber) {
+        $('#roomNum').val(roomNumber);
+        $('#reservationForm').submit();
+    }
+</script>
+</body>
+</html>

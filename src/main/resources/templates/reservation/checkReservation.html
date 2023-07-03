@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+  <title>Reserve inquire Page</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg shadow p-3 mb-5 rounded" style="background-color: #198754; margin-top: 15px">
+  <div class="container-fluid">
+    <a style="color: white" class="navbar-brand fs-5" href="#">MTVS reserve</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+            <span>
+            <a style="color: white" class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+            </span>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"  >
+
+                <span class="nav-item" style="color: white; font-size: 30px; text-align: center;
+                         padding-left: 430px">메타버스 스터디룸 예약 시스템</span><br>
+      </ul>
+      <span class="navbar-text"></span>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <h2 th:text="|${userName}님의 현재 예약 목록|"></h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Room</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tr th:each="info , index: ${infos}">
+      <td th:text="${info.userId}"></td>
+      <td th:text="${info.roomNum}"></td>
+      <td th:text="|${info.date.substring(0,4)}-${info.date.substring(4,6)}-${info.date.substring(6,8)}|"></td>
+      <th:block th:each="tlist: ${timelist}" th:if="${info.timeNum==tlist.getTime()}">
+          <td th:text="${tlist.getTimeString()}"></td>
+      </th:block>
+        <td><button  type="button" class="btn btn-success  btn-sm">
+        <a  class="text-white" style="text-decoration: none" th:href="@{|/deletereservationinfo/${info.id}|}">삭제</a></button>
+      </td>
+    </tr>
+  </table>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+          crossorigin="anonymous"></script>
+</div>
+<script>
+
+</script>
+</body>
+</html>

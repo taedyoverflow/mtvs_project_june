@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+    </style>
+    <title>Sign Page</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg shadow p-3 mb-5 rounded" style="background-color: #198754; margin-top: 15px">
+    <div class="container-fluid">
+        <a style="color: white" class="navbar-brand fs-5" href="#">MTVS reserve</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a style="color: white" class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+
+                </span>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="py-5 text-center">
+        <h2>회원 가입</h2>
+    </div>
+
+    <h4 class="mb-3">회원 정보 입력</h4>
+
+    <form action="" th:action th:object="${member}" method="post">
+
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
+        </div>
+
+        <div>
+            <label for="loginId">로그인 ID</label>
+            <input type="text" id="loginId" th:field="*{loginId}" class="form-control"
+                   th:errorclass="field-error">
+            <div class="field-error" th:errors="*{loginId}" />
+        </div>
+        <div>
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" th:field="*{password}" class="form-control"
+                   th:errorclass="field-error">
+            <div class="field-error" th:errors="*{password}" />
+        </div>
+        <div>
+            <label for="name">이름</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control"
+                   th:errorclass="field-error">
+            <div class="field-error" th:errors="*{name}" />
+        </div>
+
+        <div>
+            <label for="major">전공</label>
+            <select id="major" th:field="*{major}" class="form-control text-white"
+                    style="background-color: #479F76"
+                    th:errorclass="field-error">
+                <option value="서버개발">서버개발</option>
+                <option value="3D모델링">3D모델링</option>
+                <option value="AI">AI</option>
+                <option value="XR-Unity">XR-Unity</option>
+                <option value="XR-Unreal">XR-Unreal</option>
+                <option value="컨텐츠기획">컨텐츠기획</option>
+                <option value="자율전공">자율전공</option>
+            </select>
+            <div class="field-error" th:errors="*{major}" />
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn btn-success btn-lg" type="submit">회원 가입</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg" onclick="location.href='home.html'"
+                        th:onclick="|location.href='@{/}'|"
+                        type="button">취소</button>
+            </div>
+        </div>
+
+    </form>
+
+</div> <!-- /container -->
+</body>
+</html>
